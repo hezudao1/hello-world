@@ -1,0 +1,15 @@
+/search/hot
+
+
+ALTER TABLE near_black_user
+ADD COLUMN sid  BIGINT(20) NOT NULL  DEFAULT 0 AFTER uid,
+ADD COLUMN ssid BIGINT(20) NOT NULL  DEFAULT 0 AFTER sid,
+DROP INDEX uid,
+ADD CONSTRAINT pk_us PRIMARY KEY (uid,sid,ssid);
+
+
+UPDATE near_black_user
+SET sid=0,ssid=0
+WHERE sid IS NULL OR ssid IS NULL;
+
+
